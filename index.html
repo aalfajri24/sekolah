@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Beranda — SMA Al-Falah</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family:'Plus Jakarta Sans', sans-serif; }
+  html { scroll-behavior:smooth; }
+  body { background:#fafbfc; color:#0f172a; line-height:1.6; overflow-x:hidden; }
+
+  /* NAVBAR */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:1000;
+    background:rgba(255,255,255,0.85); backdrop-filter:blur(20px);
+    border-bottom:1px solid rgba(0,0,0,0.05);
+    padding:1rem 5%; display:flex; justify-content:space-between; align-items:center;
+    transition:all .3s;
+  }
+  .logo { display:flex; align-items:center; gap:.7rem; text-decoration:none; color:#0f172a; }
+  .logo-icon {
+    width:42px; height:42px; background:linear-gradient(135deg, #2563eb, #1e40af);
+    border-radius:12px; display:flex; align-items:center; justify-content:center;
+    color:white; font-size:1.3rem; box-shadow:0 4px 12px rgba(37,99,235,0.3);
+  }
+  .logo-text { font-size:1.25rem; font-weight:700; }
+  .nav-links { display:flex; gap:2rem; list-style:none; align-items:center; }
+  .nav-links a {
+    text-decoration:none; color:#475569; font-weight:500; font-size:.95rem;
+    transition:color .2s; position:relative;
+  }
+  .nav-links a:hover, .nav-links a.active { color:#2563eb; }
+  .btn-nav {
+    background:linear-gradient(135deg, #2563eb, #1e40af);
+    color:white !important; padding:.75rem 1.5rem; border-radius:10px;
+    font-weight:600; box-shadow:0 4px 15px rgba(37,99,235,0.3);
+    transition:all .3s;
+  }
+  .btn-nav:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(37,99,235,0.4); }
+  .menu-toggle { display:none; font-size:1.5rem; cursor:pointer; background:none; border:none; color:#0f172a; }
+
+  /* HERO */
+  .hero {
+    position:relative; min-height:100vh;
+    background-image: linear-gradient(135deg, rgba(15,23,42,0.8), rgba(30,64,175,0.75)),
+                      url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1600&q=80');
+    background-size:cover; background-position:center; background-attachment:fixed;
+    display:flex; align-items:center; justify-content:center;
+    color:white; text-align:center; padding:6rem 2rem 4rem;
+  }
+  .hero-content { max-width:900px; animation:fadeUp 1s ease; }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+
+  .badge {
+    display:inline-block; padding:.6rem 1.5rem;
+    background:rgba(255,255,255,0.15); backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,0.25);
+    border-radius:50px; font-size:.85rem; font-weight:600;
+    letter-spacing:.5px; margin-bottom:2rem;
+    animation:fadeUp 1s ease .2s both;
+  }
+  .hero h1 {
+    font-size:clamp(2.5rem, 6vw, 4.5rem); font-weight:800;
+    line-height:1.1; margin-bottom:1.5rem; letter-spacing:-0.02em;
+    animation:fadeUp 1s ease .3s both;
+  }
+  .hero h1 span {
+    background:linear-gradient(90deg, #60a5fa, #93c5fd);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  }
+  .hero p {
+    font-size:clamp(1rem, 1.8vw, 1.2rem); margin-bottom:3rem;
+    opacity:.9; font-weight:300; max-width:700px; margin-left:auto; margin-right:auto;
+    animation:fadeUp 1s ease .4s both;
+  }
+  .hero-buttons { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; animation:fadeUp 1s ease .5s both; }
+  .btn {
+    display:inline-flex; align-items:center; gap:.6rem;
+    padding:1rem 2rem; border-radius:12px;
+    font-weight:600; text-decoration:none; cursor:pointer; border:none;
+    transition:all .3s; font-size:1rem;
+  }
+  .btn-primary {
+    background:linear-gradient(135deg, #2563eb, #1e40af);
+    color:white; box-shadow:0 10px 30px rgba(37,99,235,0.4);
+  }
+  .btn-primary:hover { transform:translateY(-3px); box-shadow:0 15px 40px rgba(37,99,235,0.5); }
+  .btn-glass {
+    background:rgba(255,255,255,0.1); backdrop-filter:blur(10px);
+    color:white; border:1px solid rgba(255,255,255,0.25);
+  }
+  .btn-glass:hover { background:rgba(255,255,255,0.2); transform:translateY(-3px); }
+
+  /* STATS */
+  .stats {
+    background:white; padding:4rem 5%;
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:2rem;
+    max-width:1200px; margin:-60px auto 0; position:relative; z-index:10;
+    border-radius:24px; box-shadow:0 20px 60px rgba(0,0,0,0.08);
+  }
+  .stat-item { text-align:center; padding:1.5rem; border-radius:16px; transition:all .3s; }
+  .stat-item:hover { background:#f8fafc; transform:translateY(-5px); }
+  .stat-item h3 {
+    font-size:2.8rem; font-weight:800; margin-bottom:.3rem;
+    background:linear-gradient(135deg, #2563eb, #1e40af);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  }
+  .stat-item p { color:#64748b; font-size:.95rem; font-weight:500; }
+
+  /* SECTIONS */
+  section { padding:6rem 5%; }
+  .section-header { text-align:center; max-width:700px; margin:0 auto 4rem; }
+  .section-header .label {
+    display:inline-block; padding:.4rem 1rem; background:#dbeafe;
+    color:#1e40af; border-radius:50px; font-size:.8rem; font-weight:600;
+    margin-bottom:1rem; letter-spacing:.5px;
+  }
+  .section-header h2 {
+    font-size:clamp(2rem, 4vw, 2.8rem); font-weight:800;
+    color:#0f172a; margin-bottom:1rem; letter-spacing:-0.02em;
+  }
+  .section-header p { color:#64748b; font-size:1.05rem; }
+
+  /* FEATURES */
+  .features { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:2rem; max-width:1200px; margin:0 auto; }
+  .feature-card {
+    background:white; padding:2.5rem 2rem; border-radius:20px;
+    border:1px solid #e2e8f0; transition:all .4s; position:relative; overflow:hidden;
+  }
+  .feature-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:4px;
+    background:linear-gradient(90deg, #2563eb, #60a5fa);
+    transform:scaleX(0); transform-origin:left; transition:transform .4s;
+  }
+  .feature-card:hover {
+    transform:translateY(-8px); border-color:#2563eb;
+    box-shadow:0 20px 40px rgba(37,99,235,0.1);
+  }
+  .feature-card:hover::before { transform:scaleX(1); }
+  .feature-icon {
+    width:60px; height:60px; background:linear-gradient(135deg, #dbeafe, #bfdbfe);
+    border-radius:16px; display:flex; align-items:center; justify-content:center;
+    font-size:1.6rem; margin-bottom:1.5rem; color:#1e40af;
+  }
+  .feature-card h3 { color:#0f172a; margin-bottom:.8rem; font-size:1.2rem; font-weight:700; }
+  .feature-card p { color:#64748b; font-size:.95rem; line-height:1.7; }
+
+  /* CTA SECTION */
+  .cta-section {
+    background:linear-gradient(135deg, #2563eb, #1e40af);
+    color:white; text-align:center; padding:5rem 5%; border-radius:30px;
+    max-width:1200px; margin:0 auto 4rem; position:relative; overflow:hidden;
+  }
+  .cta-section::before {
+    content:''; position:absolute; top:-50%; right:-20%;
+    width:400px; height:400px; background:rgba(255,255,255,0.1);
+    border-radius:50%;
+  }
+  .cta-section h2 { font-size:clamp(1.8rem, 3.5vw, 2.5rem); font-weight:800; margin-bottom:1rem; position:relative; }
+  .cta-section p { opacity:.9; margin-bottom:2rem; font-size:1.05rem; position:relative; }
+  .btn-white {
+    background:white; color:#1e40af; padding:1rem 2.5rem;
+    border-radius:12px; font-weight:600; text-decoration:none;
+    display:inline-flex; align-items:center; gap:.5rem;
+    transition:all .3s; box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    position:relative;
+  }
+  .btn-white:hover { transform:translateY(-3px); box-shadow:0 15px 40px rgba(0,0,0,0.3); }
+
+  /* FOOTER */
+  footer { background:#0f172a; color:white; padding:4rem 5% 1.5rem; }
+  .footer-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:3rem; max-width:1200px; margin:0 auto 3rem; }
+  .footer-col h4 { margin-bottom:1.2rem; font-size:1rem; font-weight:700; }
+  .footer-col p, .footer-col a { color:#94a3b8; text-decoration:none; display:block; padding:.4rem 0; font-size:.9rem; transition:color .2s; }
+  .footer-col a:hover { color:white; }
+  .footer-bottom { text-align:center; padding-top:1.5rem; border-top:1px solid #1e293b; color:#64748b; font-size:.85rem; }
+
+  @media (max-width: 768px) {
+    .nav-links {
+      position:fixed; top:70px; right:-100%; flex-direction:column;
+      background:white; width:80%; height:100vh; padding:2rem;
+      box-shadow:-5px 0 20px rgba(0,0,0,0.1); transition:.3s; align-items:flex-start;
+    }
+    .nav-links.active { right:0; }
+    .menu-toggle { display:block; }
+    .hero { background-attachment:scroll; }
+    .stats { margin:-40px 1rem 0; border-radius:20px; }
+    .cta-section { border-radius:20px; margin:0 1rem 4rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">
+    <div class="logo-icon">🎓</div>
+    <div class="logo-text">SMA Al-Falah</div>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html" class="active">Beranda</a></li>
+    <li><a href="info-pendaftaran.html">Info Pendaftaran</a></li>
+    <li><a href="form-pendaftaran.html" class="btn-nav">Daftar PPDB</a></li>
+  </ul>
+  <button class="menu-toggle" onclick="document.getElementById('navLinks').classList.toggle('active')">☰</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="badge"> PENERIMAAN SISWA BARU TA 2026/2027</div>
+    <h1>Buka Pintu Masa Depanmu<br>Bersama <span>Pendidikan Terbaik</span></h1>
+    <p>Bergabunglah bersama SMA Al-Falah. Tempat di mana bakatmu dipupuk, karaktermu dibentuk, dan impianmu menuju perguruan tinggi impian menjadi kenyataan.</p>
+    <div class="hero-buttons">
+      <a href="form-pendaftaran.html" class="btn btn-primary"> Ambil Kursimu Sekarang</a>
+      <a href="info-pendaftaran.html" class="btn btn-glass"> Pelajari Syarat & Jadwal</a>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat-item"><h3>A</h3><p>Akreditasi Unggul</p></div>
+  <div class="stat-item"><h3>98%</h3><p>Lulusan Masuk PTN</p></div>
+  <div class="stat-item"><h3>50+</h3><p>Prestasi Nasional</p></div>
+  <div class="stat-item"><h3>100%</h3><p>Kelas Digital ber-AC</p></div>
+</div>
+
+<section>
+  <div class="section-header">
+    <div class="label">KEUNGGULAN KAMI</div>
+    <h2>Mengapa Harus SMA Al-Falah?</h2>
+    <p>Kami berkomitmen memberikan pendidikan terbaik untuk masa depan putra-putri Anda</p>
+  </div>
+  <div class="features">
+    <div class="feature-card">
+      <div class="feature-icon">👨‍🏫</div>
+      <h3>Guru Pengajar Handal</h3>
+      <p>Dibimbing langsung oleh pengajar lulusan PTN terkemuka yang ramah, inovatif, dan berdedikasi tinggi.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"></div>
+      <h3>Fasilitas Berstandar Digital</h3>
+      <p>Laboratorium Komputer, Lab IPA Modern, perpustakaan digital, serta akses internet cepat di seluruh area sekolah.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"></div>
+      <h3>Wadah Bakat & Prestasi</h3>
+      <p>Pengembangan potensi diri melalui 15+ pilihan ekstrakurikuler di bidang akademik, olahraga, hingga seni budaya.</p>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="cta-section">
+    <h2>Siap Memulai Perjalananmu?</h2>
+    <p>Jangan lewatkan kesempatan untuk bergabung dengan keluarga besar SMA Al-Falah</p>
+    <a href="form-pendaftaran.html" class="btn-white">Daftar PPDB Sekarang →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>🎓 SMA Al-Falah</h4>
+      <p>Membangun generasi unggul, berkarakter, dan berprestasi.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Kontak</h4>
+      <p>📍 Jl. Pendidikan No. 123</p>
+      <p>📞 (021) 1234-5678</p>
+      <p>✉️ info@smaalfalah.sch.id</p>
+    </div>
+    <div class="footer-col">
+      <h4>Menu</h4>
+      <a href="index.html">Beranda</a>
+      <a href="info-pendaftaran.html">Info Pendaftaran</a>
+      <a href="form-pendaftaran.html">Daftar PPDB</a>
+    </div>
+    <div class="footer-col">
+      <h4>Sosial Media</h4>
+      <a href="#">📘 Facebook</a>
+      <a href="#"> Instagram</a>
+      <a href="#">▶️ YouTube</a>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 SMA Al-Falah. Hak Cipta Dilindungi.</div>
+</footer>
+
+<script>
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 50) {
+      nav.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)';
+    } else {
+      nav.style.boxShadow = 'none';
+    }
+  });
+</script>
+</body>
+</html>
