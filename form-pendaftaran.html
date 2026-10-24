@@ -5,187 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Form Pendaftaran — SMA Al-Falah</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-  * { margin:0; padding:0; box-sizing:border-box; font-family:'Plus Jakarta Sans', sans-serif; }
-  html { scroll-behavior:smooth; }
-  body { background:#fafbfc; color:#0f172a; line-height:1.6; }
-
-  nav {
-    position:fixed; top:0; left:0; right:0; z-index:1000;
-    background:rgba(255,255,255,0.85); backdrop-filter:blur(20px);
-    border-bottom:1px solid rgba(0,0,0,0.05);
-    padding:1rem 5%; display:flex; justify-content:space-between; align-items:center;
-  }
-  .logo { display:flex; align-items:center; gap:.7rem; text-decoration:none; color:#0f172a; }
-  .logo-icon {
-    width:42px; height:42px; background:linear-gradient(135deg, #2563eb, #1e40af);
-    border-radius:12px; display:flex; align-items:center; justify-content:center;
-    color:white; font-size:1.3rem; box-shadow:0 4px 12px rgba(37,99,235,0.3);
-  }
-  .logo-text { font-size:1.25rem; font-weight:700; }
-  .nav-links { display:flex; gap:2rem; list-style:none; align-items:center; }
-  .nav-links a { text-decoration:none; color:#475569; font-weight:500; font-size:.95rem; transition:color .2s; }
-  .nav-links a:hover, .nav-links a.active { color:#2563eb; }
-  .btn-nav {
-    background:linear-gradient(135deg, #2563eb, #1e40af);
-    color:white !important; padding:.75rem 1.5rem; border-radius:10px;
-    font-weight:600; box-shadow:0 4px 15px rgba(37,99,235,0.3); transition:all .3s;
-  }
-  .btn-nav:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(37,99,235,0.4); }
-  .menu-toggle { display:none; font-size:1.5rem; cursor:pointer; background:none; border:none; color:#0f172a; }
-
-  .page { padding-top:80px; }
-
-  .page-header {
-    background:linear-gradient(135deg, #0f172a, #1e40af);
-    color:white; padding:5rem 5% 4rem; text-align:center; position:relative; overflow:hidden;
-  }
-  .page-header::before {
-    content:''; position:absolute; top:-50%; right:-10%;
-    width:400px; height:400px; background:rgba(255,255,255,0.05);
-    border-radius:50%;
-  }
-  .page-header .badge {
-    display:inline-block; padding:.5rem 1.2rem;
-    background:rgba(255,255,255,0.15); backdrop-filter:blur(10px);
-    border:1px solid rgba(255,255,255,0.25);
-    border-radius:50px; font-size:.8rem; font-weight:600; margin-bottom:1.5rem; position:relative;
-  }
-  .page-header h1 { font-size:clamp(2rem, 4vw, 3rem); font-weight:800; margin-bottom:.8rem; letter-spacing:-0.02em; position:relative; }
-  .page-header p { opacity:.85; font-size:1.05rem; position:relative; }
-
-  section { padding:5rem 5%; }
-  .form-wrapper { max-width:800px; margin:0 auto; }
-
-  .form-container {
-    background:white; padding:3rem; border-radius:24px;
-    border:1px solid #e2e8f0; box-shadow:0 10px 40px rgba(0,0,0,0.04);
-  }
-  .form-note {
-    background:#eff6ff; border-left:4px solid #2563eb;
-    padding:1rem 1.2rem; border-radius:10px; margin-bottom:2.5rem;
-    color:#1e40af; font-size:.9rem; display:flex; align-items:flex-start; gap:.8rem;
-  }
-  .form-section-title {
-    font-size:1.1rem; font-weight:700; color:#0f172a;
-    margin:2.5rem 0 1.5rem; padding-bottom:.8rem;
-    border-bottom:2px solid #f1f5f9;
-    display:flex; align-items:center; gap:.6rem;
-  }
-  .form-section-title:first-of-type { margin-top:0; }
-  .form-section-title .step {
-    background:linear-gradient(135deg, #2563eb, #1e40af);
-    color:white; width:28px; height:28px; border-radius:50%;
-    display:inline-flex; align-items:center; justify-content:center;
-    font-size:.85rem; font-weight:700;
-  }
-  .form-group { margin-bottom:1.5rem; }
-  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
-  label { display:block; margin-bottom:.5rem; font-weight:600; color:#0f172a; font-size:.9rem; }
-  label .required { color:#ef4444; }
-  input, select, textarea {
-    width:100%; padding:.9rem 1rem; border:1.5px solid #e2e8f0;
-    border-radius:10px; font-size:.95rem; font-family:inherit;
-    transition:all .2s; background:#fafbfc;
-  }
-  input:focus, select:focus, textarea:focus {
-    outline:none; border-color:#2563eb; background:white;
-    box-shadow:0 0 0 4px rgba(37,99,235,0.1);
-  }
-  textarea { resize:vertical; min-height:100px; }
-
-  /* RADIO GROUP */
-  .radio-group { display:flex; gap:1rem; flex-wrap:wrap; }
-  .radio-option {
-    flex:1; min-width:140px; position:relative;
-  }
-  .radio-option input { position:absolute; opacity:0; }
-  .radio-option label {
-    display:block; padding:1rem; border:2px solid #e2e8f0;
-    border-radius:10px; text-align:center; cursor:pointer;
-    transition:all .2s; font-weight:500; margin:0;
-  }
-  .radio-option input:checked + label {
-    border-color:#2563eb; background:#eff6ff; color:#1e40af;
-  }
-  .radio-option label:hover { border-color:#2563eb; }
-
-  /* UPLOAD AREA */
-  .upload-area {
-    border:2px dashed #cbd5e1; border-radius:12px;
-    padding:2.5rem 2rem; text-align:center;
-    transition:all .3s; cursor:pointer; background:#fafbfc;
-  }
-  .upload-area:hover { border-color:#2563eb; background:#eff6ff; }
-  .upload-icon {
-    width:60px; height:60px; background:linear-gradient(135deg, #dbeafe, #bfdbfe);
-    border-radius:50%; display:flex; align-items:center; justify-content:center;
-    font-size:1.5rem; margin:0 auto 1rem; color:#1e40af;
-  }
-  .upload-area h4 { color:#0f172a; margin-bottom:.3rem; font-size:1rem; font-weight:600; }
-  .upload-area p { color:#64748b; font-size:.85rem; }
-  .upload-area input { display:none; }
-
-  .form-submit {
-    width:100%; padding:1.1rem;
-    background:linear-gradient(135deg, #2563eb, #1e40af);
-    color:white; border:none; border-radius:12px; font-size:1rem;
-    font-weight:600; cursor:pointer; transition:all .3s; margin-top:1rem;
-    box-shadow:0 10px 30px rgba(37,99,235,0.3);
-    display:flex; align-items:center; justify-content:center; gap:.5rem;
-  }
-  .form-submit:hover { transform:translateY(-2px); box-shadow:0 15px 40px rgba(37,99,235,0.4); }
-
-  footer { background:#0f172a; color:white; padding:4rem 5% 1.5rem; }
-  .footer-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:3rem; max-width:1200px; margin:0 auto 3rem; }
-  .footer-col h4 { margin-bottom:1.2rem; font-size:1rem; font-weight:700; }
-  .footer-col p, .footer-col a { color:#94a3b8; text-decoration:none; display:block; padding:.4rem 0; font-size:.9rem; transition:color .2s; }
-  .footer-col a:hover { color:white; }
-  .footer-bottom { text-align:center; padding-top:1.5rem; border-top:1px solid #1e293b; color:#64748b; font-size:.85rem; }
-
-  /* MODAL */
-  .modal {
-    display:none; position:fixed; inset:0; background:rgba(15,23,42,0.7); backdrop-filter:blur(5px);
-    z-index:2000; align-items:center; justify-content:center; padding:1rem;
-  }
-  .modal.active { display:flex; }
-  .modal-content {
-    background:white; padding:3rem 2rem; border-radius:20px;
-    text-align:center; max-width:420px; animation:popIn .4s ease;
-  }
-  @keyframes popIn { from { transform:scale(.8); opacity:0; } to { transform:scale(1); opacity:1; } }
-  .modal-icon {
-    width:70px; height:70px; background:linear-gradient(135deg, #10b981, #059669);
-    border-radius:50%; margin:0 auto 1.5rem; display:flex; align-items:center; justify-content:center;
-    font-size:2rem; color:white;
-  }
-  .modal h3 { color:#0f172a; margin-bottom:.8rem; font-size:1.4rem; font-weight:700; }
-  .modal p { color:#64748b; margin-bottom:1.5rem; font-size:.95rem; }
-  .btn-modal {
-    background:linear-gradient(135deg, #2563eb, #1e40af);
-    color:white; padding:.9rem 2rem; border:none; border-radius:10px;
-    font-weight:600; cursor:pointer; transition:all .3s;
-  }
-  .btn-modal:hover { transform:translateY(-2px); box-shadow:0 10px 25px rgba(37,99,235,0.4); }
-
-  @media (max-width: 768px) {
-    .nav-links {
-      position:fixed; top:70px; right:-100%; flex-direction:column;
-      background:white; width:80%; height:100vh; padding:2rem;
-      box-shadow:-5px 0 20px rgba(0,0,0,0.1); transition:.3s; align-items:flex-start;
-    }
-    .nav-links.active { right:0; }
-    .menu-toggle { display:block; }
-    .form-row { grid-template-columns:1fr; }
-    .form-container { padding:2rem 1.5rem; }
-  }
-</style>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <nav>
   <a href="index.html" class="logo">
-    <div class="logo-icon">🎓</div>
+    <div class="logo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/><path d="M9 9h.01M12 9h.01M15 9h.01"/></svg></div>
     <div class="logo-text">SMA Al-Falah</div>
   </a>
   <ul class="nav-links" id="navLinks">
@@ -291,7 +117,7 @@
 <footer>
   <div class="footer-grid">
     <div class="footer-col">
-      <h4> SMA Al-Falah</h4>
+      <h4><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:.4rem"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg>SMA Al-Falah</h4>
       <p>Membangun generasi unggul, berkarakter, dan berprestasi.</p>
     </div>
     <div class="footer-col">
@@ -309,11 +135,11 @@
     <div class="footer-col">
       <h4>Sosial Media</h4>
       <a href="#">📘 Facebook</a>
-      <a href="#"> Instagram</a>
+      <a href="#">📸 Instagram</a>
       <a href="#">▶️ YouTube</a>
     </div>
   </div>
-  <div class="footer-bottom">© 2026 SMA Al-Falah. Hak Cipta Dilindungi.</div>
+  <div class="footer-bottom">Buka Pintu Masa Depanmu, Bersama Pendidikan Terbaik</div>
 </footer>
 
 <!-- MODAL SUKSES -->
@@ -345,3 +171,7 @@
 </script>
 </body>
 </html>
+
+
+
+

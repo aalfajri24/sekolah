@@ -19,11 +19,21 @@
     transition:all .3s;
   }
   .logo { display:flex; align-items:center; gap:.7rem; text-decoration:none; color:#0f172a; }
-  .logo-icon {
-    width:42px; height:42px; background:linear-gradient(135deg, #2563eb, #1e40af);
-    border-radius:12px; display:flex; align-items:center; justify-content:center;
-    color:white; font-size:1.3rem; box-shadow:0 4px 12px rgba(37,99,235,0.3);
-  }
+    .logo-icon {
+      width:50px; height:50px; background:linear-gradient(135deg, #60a5fa, #1d4ed8);
+      border-radius:16px; display:flex; align-items:center; justify-content:center;
+      color:white; box-shadow:0 10px 24px rgba(37,99,235,0.45), 0 0 0 4px rgba(37,99,235,0.12), inset 0 1px 0 rgba(255,255,255,0.3);
+      transition:transform .35s, box-shadow .35s;
+      position:relative; overflow:hidden;
+      animation:logoPulse 3s ease-in-out infinite;
+    }
+    @keyframes logoPulse { 0%,100% { box-shadow:0 10px 24px rgba(37,99,235,0.45), 0 0 0 4px rgba(37,99,235,0.12), inset 0 1px 0 rgba(255,255,255,0.3); } 50% { box-shadow:0 12px 30px rgba(37,99,235,0.55), 0 0 0 6px rgba(37,99,235,0.18), inset 0 1px 0 rgba(255,255,255,0.35); } }
+    .logo-icon::after {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(135deg, rgba(255,255,255,0.3), transparent 55%);
+      pointer-events:none;
+    }
+    .logo:hover .logo-icon { transform:rotate(-8deg) scale(1.08); animation:none; box-shadow:0 14px 34px rgba(37,99,235,0.6), 0 0 0 6px rgba(37,99,235,0.2), inset 0 1px 0 rgba(255,255,255,0.35); }
   .logo-text { font-size:1.25rem; font-weight:700; }
   .nav-links { display:flex; gap:2rem; list-style:none; align-items:center; }
   .nav-links a {
@@ -38,16 +48,22 @@
     transition:all .3s;
   }
   .btn-nav:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(37,99,235,0.4); }
-  .menu-toggle { display:none; font-size:1.5rem; cursor:pointer; background:none; border:none; color:#0f172a; }
+  a:focus-visible, button:focus-visible { outline:3px solid #2563eb; outline-offset:2px; border-radius:8px; }
+  .feature-card { transition:transform .4s, box-shadow .4s, border-color .4s; }
 
   /* HERO */
   .hero {
     position:relative; min-height:100vh;
-    background-image: linear-gradient(135deg, rgba(15,23,42,0.8), rgba(30,64,175,0.75)),
-                      url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1600&q=80');
+    background-image: linear-gradient(135deg, rgba(15,23,42,0.55), rgba(30,64,175,0.5)),
+                      url('Modern Blue-and-White School Courtyard.png');
     background-size:cover; background-position:center; background-attachment:fixed;
     display:flex; align-items:center; justify-content:center;
     color:white; text-align:center; padding:6rem 2rem 4rem;
+  }
+  .hero::after {
+    content:''; position:absolute; left:0; right:0; bottom:0; height:180px;
+    background:linear-gradient(to bottom, rgba(250,251,252,0), rgba(250,251,252,1));
+    pointer-events:none;
   }
   .hero-content { max-width:900px; animation:fadeUp 1s ease; }
   @keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
@@ -194,7 +210,7 @@
 
 <nav>
   <a href="index.html" class="logo">
-    <div class="logo-icon">🎓</div>
+    <div class="logo-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/><path d="M9 9h.01M12 9h.01M15 9h.01"/></svg></div>
     <div class="logo-text">SMA Al-Falah</div>
   </a>
   <ul class="nav-links" id="navLinks">
@@ -207,8 +223,7 @@
 
 <section class="hero">
   <div class="hero-content">
-    <div class="badge"> PENERIMAAN SISWA BARU TA 2026/2027</div>
-    <h1>Buka Pintu Masa Depanmu<br>Bersama <span>Pendidikan Terbaik</span></h1>
+    <h1>Membangun generasi <span style="background:linear-gradient(90deg,#60a5fa,#93c5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">berkarakter</span>, dan berprestasi.</h1>
     <p>Bergabunglah bersama SMA Al-Falah. Tempat di mana bakatmu dipupuk, karaktermu dibentuk, dan impianmu menuju perguruan tinggi impian menjadi kenyataan.</p>
     <div class="hero-buttons">
       <a href="form-pendaftaran.html" class="btn btn-primary"> Ambil Kursimu Sekarang</a>
@@ -226,24 +241,23 @@
 
 <section>
   <div class="section-header">
-    <div class="label">KEUNGGULAN KAMI</div>
     <h2>Mengapa Harus SMA Al-Falah?</h2>
     <p>Kami berkomitmen memberikan pendidikan terbaik untuk masa depan putra-putri Anda</p>
   </div>
   <div class="features">
     <div class="feature-card">
-      <div class="feature-icon">👨‍🏫</div>
+      <div class="feature-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
       <h3>Guru Pengajar Handal</h3>
       <p>Dibimbing langsung oleh pengajar lulusan PTN terkemuka yang ramah, inovatif, dan berdedikasi tinggi.</p>
     </div>
     <div class="feature-card">
-      <div class="feature-icon"></div>
-      <h3>Fasilitas Berstandar Digital</h3>
+      <div class="feature-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+      <h3>Fasilitas Modern</h3>
       <p>Laboratorium Komputer, Lab IPA Modern, perpustakaan digital, serta akses internet cepat di seluruh area sekolah.</p>
     </div>
     <div class="feature-card">
-      <div class="feature-icon"></div>
-      <h3>Wadah Bakat & Prestasi</h3>
+      <div class="feature-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></div>
+      <h3>Ekstrakurikuler Lengkap</h3>
       <p>Pengembangan potensi diri melalui 15+ pilihan ekstrakurikuler di bidang akademik, olahraga, hingga seni budaya.</p>
     </div>
   </div>
@@ -260,7 +274,7 @@
 <footer>
   <div class="footer-grid">
     <div class="footer-col">
-      <h4>🎓 SMA Al-Falah</h4>
+      <h4><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:.4rem"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg>SMA Al-Falah</h4>
       <p>Membangun generasi unggul, berkarakter, dan berprestasi.</p>
     </div>
     <div class="footer-col">
@@ -282,7 +296,7 @@
       <a href="#">▶️ YouTube</a>
     </div>
   </div>
-  <div class="footer-bottom">© 2026 SMA Al-Falah. Hak Cipta Dilindungi.</div>
+  <div class="footer-bottom">Buka Pintu Masa Depanmu, Bersama Pendidikan Terbaik</div>
 </footer>
 
 <script>
@@ -294,6 +308,12 @@
     } else {
       nav.style.boxShadow = 'none';
     }
+  });
+  // Close mobile menu on link click
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('active');
+    });
   });
 </script>
 </body>
