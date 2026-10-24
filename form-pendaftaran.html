@@ -140,6 +140,36 @@ nav.scrolled {
   50% { box-shadow: 0 12px 30px rgba(37, 99, 235, 0.55), 0 0 0 6px rgba(37, 99, 235, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.35); }
 }
 
+@keyframes logoPulse {
+  0%,
+  100% {
+    box-shadow: 0 10px 24px rgba(37, 99, 235, 0.45),
+      0 0 0 4px rgba(37, 99, 235, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.55),
+      0 0 0 6px rgba(37, 99, 235, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  }
+}
+
+.logo-icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), transparent 55%);
+  pointer-events: none;
+}
+
+.logo:hover .logo-icon {
+  transform: rotate(-8deg) scale(1.08);
+  animation: none;
+  box-shadow: 0 14px 34px rgba(37, 99, 235, 0.6),
+    0 0 0 6px rgba(37, 99, 235, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
 .logo-text {
   font-size: 1.25rem;
   font-weight: 700;
