@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Info Pendaftaran — SMA Al-Falah</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -29,7 +29,7 @@
   </div>
 
   <section>
-    <div class="container">
+    <div style="max-width:1200px;margin:0 auto;">
 
       <!-- TIMELINE -->
       <div class="section-title">
@@ -161,6 +161,15 @@
   <div class="footer-bottom">Buka Pintu Masa Depanmu, Bersama Pendidikan Terbaik</div>
 </footer>
 
+<script>
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 50) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
+  });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('active'));
+  });
+</script>
 </body>
 </html>
 
